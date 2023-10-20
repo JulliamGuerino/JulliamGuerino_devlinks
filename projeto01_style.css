@@ -84,6 +84,8 @@ div#profile
 {
     text-align: center;
     padding: 24px;
+    
+
 }
 
 div#profile img
@@ -92,6 +94,7 @@ div#profile img
     width: 112px;
 
     margin: auto;
+    border-radius: 50%;
 }
 
 div#profile p
