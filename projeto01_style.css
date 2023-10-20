@@ -1,0 +1,285 @@
+/*limpando alguns parametros padroes do navegador*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root
+{
+    --text_color: white;
+    --bg_url: url(./assets/bg-mobile.jpg);
+    --stroke_color: rgba(255, 255, 255, .5);
+    --surface_color: rgba(255, 255, 255, .05);
+    --surface-color-hover: rgba(255, 255, 255, .02);
+    --highlight_color: rgba(255, 255, 255, 0.2);
+    --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+.light
+{
+    --text_color: black;
+    --bg_url: url(./assets/bg-mobile-light.jpg);
+    --stroke_color: rgba(0, 0, 0, .5);
+    --surface_color: rgba(0, 0, 0, .05);
+    --surface-color-hover: rgba(0, 0, 0, .02);
+    --highlight_color: rgba(0, 0, 0, 0.2);
+    --switch-bg-url: url(./assets/sun.svg);
+}
+body
+{
+    /*
+    background-image: url(./assets/bg-mobile.jpg);/*Colocando uma img de background
+    background-repeat: no-repeat;/*por padrao as imagens repetem, ai assim elas param de repetir
+    background-position: center;
+    background-position: top center;
+    background-size: cover;
+    */
+
+    /*
+        Essa é uma forma de escrever todos os comandos, mais compactos
+        background: color image repeat position /size
+    */
+
+    background: var(--bg_url) no-repeat top center /cover;
+    height: 100vh;
+}
+
+/*
+    Com o * eu digo que estou alterando de forma universal
+    ou seja todos os bodys, tudo que estiver em dentro dele
+    terão essas características
+*/
+
+body *
+{
+    font-family: 'Inter', sans-serif; 
+    color: var(--text_color); 
+}
+/*Normalmente não precisamos inserir uma altura
+    por que a altura ela acompanha o conteúdo da pagina
+    então quanto mais conteúdo, maior é a altura.
+    A altura tem que ser fluída, não pode ser algo  muito fixo
+*/
+div#container
+{
+    width: 100%;
+    max-width: 588px;
+    /*
+        O margin e o padding contem 4 argumentos em dentro
+        margin top > margin right > margin botton > margin left
+    */
+    margin: 56px auto 0px;
+    padding: 0px 24px;
+}
+
+
+/*A imagem é inline*/
+/*
+    Todo elemento inline ele aceita que o pai defina o alinhamento
+    entao posso alinhar ele no centro sem precisar trocar a forma de 
+    display
+*/
+div#profile 
+{
+    text-align: center;
+    padding: 24px;
+}
+
+div#profile img
+{
+    /*display: block;*/
+    width: 112px;
+
+    margin: auto;
+}
+
+div#profile p
+{
+    font-weight: 500;
+    line-height: 24px;
+    padding-top: 8px;
+}
+
+/*Switch*/
+div#switch
+{
+    /*
+        aqui estou garantido que meu botao
+        a posicao dele vai continuar relativa ao switch
+        ou seja, vai ficar em dentro dos limites da caixa
+        mesmo tendo criado uma camada com o position: absolute
+    */
+    position: relative;
+    width: 64px;
+    margin: 4px auto;
+}
+
+div#switch button
+{
+    width: 32px;
+    height: 32px;
+    background: white var(--switch-bg-url) no-repeat center;
+    border: 0;
+    border-radius: 50%;
+
+    /*Aqui o botao vai sobrepor a camada*/
+    position: absolute;
+    top: 50%;
+    left: 0;
+    /*
+        Aqui estou alterando a camada que ele se encontra
+        para ele ficar acima do span
+    */
+    z-index: 1;
+    transform: translateY(-50%);
+    animation: deslizar_volta .4s;
+
+}
+
+.light #switch button
+{
+    /*Forwards mantem as propriedades finais da animação, não voltando bruscamente*/
+    animation: deslizar .4s forwards;
+}
+
+div#switch button:hover
+{
+    outline: 8px solid var(--highlight_color)
+}
+div#switch span
+{
+    display: block;
+    width: 64px;
+    height: 24px;
+    background: var(--surface_color);
+    border: 1px solid var(--stroke_color);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+}
+
+/* Links */
+ul
+{
+    /*Sem estilo na lista (sem °)*/
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 24px 0;
+}
+
+ul li a
+{
+    /*border: 1px solid red;*/
+
+    /*Aqui ele vai tentar se encaixar de maneira flexivel um do lado do outro,
+     e ocupando todo espaço disponivel*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px 24px;
+
+    background: var(--surface_color);
+    border: 1px solid var(--stroke_color);
+    border-radius: 8px;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    
+    text-decoration: none;/*Edita a linha em baixo do link*/
+    font-weight: 500;
+
+    /*
+        transition transicao antes do hover, antes do mouse entrar no botao
+        all para transicao fluida de tudo
+        background para transicao fluida apenas do background
+    */
+    transition: background .2s;
+}
+
+/*
+    Aplicando detalhes no botão
+
+    pseudo-selector
+    isso é pra quando o mouse estiver em cima do botão
+    (:hover)
+*/
+ul li a:hover
+{
+    background: var(--surface-color-hover);
+    border: 1px solid var(--text_color);
+}
+
+div#social_links
+{
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    font-size: 24px;
+}
+
+div#social_links a
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    transition: background .2s; 
+    border-radius: 50%;
+}
+
+div#social_links a:hover
+{
+    background: var(--highlight_color);
+   
+}
+
+footer
+{
+    padding: 24px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Media Queries*/
+@media(min-width: 700px)
+{
+    :root {
+        --bg_url: url(./assets/bg-desktop.jpg);
+    }
+
+    .light
+    {
+        --bg_url: url(./assets/bg-desktop-light.jpg);
+    }
+}
+
+/*Animação para o botao deslizar quando trocar de modo*/
+@keyframes deslizar
+{
+    from{
+        left: 0;
+    }
+
+    to
+    {
+        left: 50%;
+    }
+}
+@keyframes deslizar_volta
+{
+    from{
+        left: 50%;
+    }
+
+    to
+    {
+        left: 0;
+    }
+}
